@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受付アプリ</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>受付アプリ</h1>
+    <button onclick="notifyChatwork('お客様')">お客様</button>
+    <button onclick="notifyChatwork('配達業者様')">配達業者様</button>
+
+    <script>
+        function notifyChatwork(visitorType) {
+            alert(visitorType + "がタッチされました。通知が送信されます。");
+            // ここにChatwork APIやZapierのコードを追加します
+        }
+    </script>
+</body>
+</html>
