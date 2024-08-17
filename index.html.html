@@ -8,29 +8,26 @@
         body {
             text-align: center;
             margin-top: 50px;
+            background-image: url('ロゴのみ背景白.jpg'); /* ロゴ画像のファイル名を指定 */
+            background-size: cover; /* 画像が全体にフィットするように設定 */
+            background-repeat: no-repeat; /* 画像を繰り返さない */
+            background-position: center center; /* 画像を中央に配置 */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
         }
         button {
             font-size: 24px;
             padding: 10px 20px;
             margin: 20px;
         }
-    <style>
-    body {
-        background-image: url('ロゴのみ背景白.jpg'); /* ロゴ画像のファイル名を指定 */
-        background-size: cover; /* 画像が全体にフィットするように設定 */
-        background-repeat: no-repeat; /* 画像を繰り返さない */
-        background-position: center center; /* 画像を中央に配置 */
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        width: 100vw;
-    }
-</style>
+    </style>
 </head>
 <body>
     <h1>受   付</h1>
-<button onclick="notifyChatwork('お客様')">お客様はこちら</button>
-<button onclick="notifyChatwork('配達業者様')">配送業者様はこちら</button>
+    <button onclick="notifyChatwork('お客様')">お客様はこちら</button>
+    <button onclick="notifyChatwork('配達業者様')">配送業者様はこちら</button>
 
     <script>
         function notifyChatwork(visitorType) {
@@ -40,3 +37,4 @@
     </script>
 </body>
 </html>
+
