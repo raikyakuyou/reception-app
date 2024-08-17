@@ -7,7 +7,7 @@
     <style>
         body {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 50px;
             background-image: url('ロゴのみ背景白.jpg'); /* ロゴ画像のファイル名を指定 */
             background-size: cover; /* 画像が全体にフィットするように設定 */
             background-repeat: no-repeat; /* 画像を繰り返さない */
@@ -17,8 +17,12 @@
             height: 100vh;
             width: 100vw;
         }
+        h1 {
+            font-size: 1.5em; /* 受付の文字を1.5倍に */
+            letter-spacing: 2em; /* 受と付の間に2文字分のスペースを追加 */
+        }
         button {
-            font-size: 48px; /* フォントサイズを大きく */
+            font-size: 32px; /* フォントサイズを大きく */
             padding: 15px 30px; /* ボタンのパディングも少し増やす */
             margin: 40px; /* ボタンの間隔を広げる */
             margin-top: 50px; /* ボタンの位置を下げる */
@@ -26,7 +30,7 @@
     </style>
 </head>
 <body>
-    <h1>受   付</h1>
+    <h1>受　付</h1> <!-- 受と付の間に全角スペースを追加 -->
     <button onclick="notifyChatwork('お客様')">お客様はこちら</button>
     <button onclick="notifyChatwork('配達業者様')">配送業者様はこちら</button>
 
