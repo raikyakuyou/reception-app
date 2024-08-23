@@ -23,17 +23,26 @@
             margin: 40px; /* ボタンの間隔を広げる */
             margin-top: 50px; /* ボタンの位置を下げる */
         }
+        #message {
+            font-size: 30px; /* メッセージのフォントサイズ */
+            color: red; /* メッセージの色 */
+            margin-top: 50px; /* メッセージの位置を調整 */
+        }
     </style>
 </head>
 <body>
     <h1>受   　　付</h1>
     <button onclick="notifyChatwork('お客様')">呼　び　出　し</button>
     <button onclick="notifyChatwork('配達業者様')">郵　便・宅　配</button>
+    <p id="message"></p> <!-- メッセージを表示するための要素 -->
 
     <script>
         function notifyChatwork(visitorType) {
-            alert(visitorType + "がタッチされました。通知が送信されます。");
+            // メッセージを表示
+            document.getElementById('message').innerText = "しばらくお待ちください。";
+
             // ここにChatwork APIやZapierのコードを追加します
+            console.log(visitorType + "がタッチされました"); // デバッグ用のメッセージ
         }
     </script>
 </body>
