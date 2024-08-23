@@ -27,38 +27,14 @@
 </head>
 <body>
     <h1>受   　　付</h1>
-    <button onclick="notifyChatwork('【呼び出し】による訪問です。')">呼　び　出　し</button>
-    <button onclick="notifyChatwork('【郵便・宅配】による訪問です。')">郵　便・宅　配</button>
+    <button onclick="notifyChatwork('お客様')">呼　び　出　し</button>
+    <button onclick="notifyChatwork('配達業者様')">郵　便・宅　配</button>
 
     <script>
-        function notifyChatwork(message) {
-            const apiToken = 'aec0b37a24f3f2daf04ae960f7b98c1f'; // ここにAPIトークンを入力
-            const roomId = '370023165'; // ここに通知を送りたいチャットルームIDを入力
-            const url = `https://api.chatwork.com/v2/rooms/${roomId}/messages`;
-            const headers = {
-                'X-ChatWorkToken': apiToken,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            };
-            const body = `body=${encodeURIComponent(message)}`;
-
-            fetch(url, {
-                method: 'POST',
-                headers: headers,
-                body: body
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("通知が送信されました。");
-                } else {
-                    alert("通知の送信に失敗しました。");
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("エラーが発生しました。");
-            });
+        function notifyChatwork(visitorType) {
+            alert(visitorType + "がタッチされました。通知が送信されます。");
+            // ここにChatwork APIやZapierのコードを追加します
         }
     </script>
 </body>
 </html>
-
