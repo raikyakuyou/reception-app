@@ -32,21 +32,47 @@
 </head>
 <body>
     <h1>受   　　付</h1>
-    <button onclick="notifyChatwork('お客様')">呼　び　出　し</button>
-    <button onclick="notifyChatwork('配達業者様')">郵　便・宅　配</button>
+    <button onclick="notifyChatwork('呼び出し')">呼　び　出　し</button>
+    <button onclick="notifyChatwork('郵便・宅配')">郵　便・宅　配</button>
     <p id="message"></p>
 
     <script>
+        const apiToken = 'aec0b37a24f3f2daf04ae960f7b98c1f';  // ChatworkのAPIトークンをここに入力
+        const roomId = '370023165'; // メッセージを送信したいルームIDをここに入力
+
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
             messageElement.innerText = "呼び出しております。しばらくお待ちください。";
             
+            // Chatworkに送信するメッセージ内容
+            let chatworkMessage = "";
+            if (visitorType === '呼び出し') {
+                chatworkMessage = "[呼び出し]による訪問です。";
+            } else if (visitorType === '郵便・宅配') {
+                chatworkMessage = "[郵便・宅配]による訪問です。";
+            }
+
+            // Chatwork APIを使用してメッセージを送信
+            fetch(`https://api.chatwork.com/v2/rooms/${roomId}/messages`, {
+                method: 'POST',
+                headers: {
+                    'X-ChatWorkToken': apiToken,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `body=${encodeURIComponent(chatworkMessage)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Chatworkへの通知に成功しました', data);
+            })
+            .catch(error => {
+                console.error('Chatworkへの通知に失敗しました', error);
+            });
+
             // 3秒後にメッセージを消す
             setTimeout(() => {
                 messageElement.innerText = "";
             }, 3000);
-
-            // ここにChatwork APIやZapierのコードを追加します
         }
     </script>
 </body>
