@@ -37,8 +37,8 @@
     <p id="message"></p>
 
     <script>
-        const apiToken = 'aec0b37a24f3f2daf04ae960f7b98c1f';  // ChatworkのAPIトークンをここに入力
-        const roomId = '370023165'; // メッセージを送信したいルームIDをここに入力
+        // Google Cloud FunctionsのエンドポイントURL
+        const cloudFunctionsUrl = 'https://asia-northeast1-receptionapp-433415.cloudfunctions.net/notifyChatwork';  // ここにGoogle Cloud FunctionsのURLを入力
 
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
@@ -52,14 +52,13 @@
                 chatworkMessage = "[郵便・宅配]による訪問です。";
             }
 
-            // Chatwork APIを使用してメッセージを送信
-            fetch(`https://api.chatwork.com/v2/rooms/${roomId}/messages`, {
+            // Google Cloud Functionsにメッセージを送信
+            fetch(cloudFunctionsUrl, {
                 method: 'POST',
                 headers: {
-                    'X-ChatWorkToken': apiToken,
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 },
-                body: `body=${encodeURIComponent(chatworkMessage)}`
+                body: JSON.stringify({ message: chatworkMessage })
             })
             .then(response => response.json())
             .then(data => {
@@ -77,4 +76,3 @@
     </script>
 </body>
 </html>
-
