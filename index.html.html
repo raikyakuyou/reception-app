@@ -24,9 +24,9 @@
             margin-top: 50px; /* ボタンの位置を下げる */
         }
         #message {
-            font-size: 30px;
+            font-size: 45px; /* フォントサイズを1.5倍に */
             margin-top: 50px;
-            color: red;
+            color: black; /* 文字色を黒に設定 */
         }
     </style>
 </head>
@@ -38,9 +38,17 @@
 
     <script>
         function notifyChatwork(visitorType) {
-            document.getElementById('message').innerText = "呼び出しております。しばらくお待ちください。";
+            const messageElement = document.getElementById('message');
+            messageElement.innerText = "呼び出しております。しばらくお待ちください。";
+            
+            // 3秒後にメッセージを消す
+            setTimeout(() => {
+                messageElement.innerText = "";
+            }, 3000);
+
             // ここにChatwork APIやZapierのコードを追加します
         }
     </script>
 </body>
 </html>
+
