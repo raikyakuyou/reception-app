@@ -38,7 +38,7 @@
 
     <script>
         // Cloud Run のエンドポイントURL
-        const cloudFunctionsUrl = 'https://chatworknotifier-rj2fewnz6a-an.a.run.app';  // Cloud RunのURL
+        const cloudRunUrl = 'https://chatworknotifier-685199590370.asia-northeast1.run.app';  // 正しいエンドポイントURL
 
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
@@ -53,7 +53,7 @@
             }
 
             // Cloud Runにメッセージを送信
-            fetch(cloudFunctionsUrl, {
+            fetch(cloudRunUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
