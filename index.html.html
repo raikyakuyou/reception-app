@@ -7,58 +7,67 @@
     <style>
         body {
             text-align: center;
-            margin: 0;
-            padding: 0;
-            background-image: url('受付用①.jpg'); /* 新しい画像のファイル名を指定 */
+            margin-top: 50px;
+            background-image: url('受付用①.jpg'); /* 新しい背景画像のファイル名 */
             background-size: cover; /* 画像が全体にフィットするように設定 */
             background-repeat: no-repeat; /* 画像を繰り返さない */
             background-position: center center; /* 画像を中央に配置 */
+            margin: 0;
+            padding: 0;
             height: 100vh;
             width: 100vw;
-            overflow: hidden; /* スクロールバーを隠す */
-        }
-        .button-container {
-            display: flex;
-            justify-content: center; /* ボタンを横並びに配置 */
-            align-items: center;
-            height: 100%; /* 全高を使用 */
-            flex-direction: row; /* ボタンを横並びにする */
         }
         button {
-            font-size: 24px;
-            padding: 10px 20px;
-            margin: 20px;
-            background-color: transparent; /* ボタンの背景色を透明にする */
-            border: 2px solid #D4CE91; /* ボタンの枠線の色を指定 */
-            color: #D4CE91; /* ボタンの文字色を指定 */
-            border-radius: 5px; /* ボタンの角を丸くする */
-            cursor: pointer; /* マウスカーソルをポインタにする */
-            transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーションを追加 */
+            font-size: 40px; /* フォントサイズを大きく */
+            padding: 15px 30px; /* ボタンのパディングも少し増やす */
+            margin: 20px; /* ボタンの間隔を広げる */
+            margin-top: 50px; /* ボタンの位置を下げる */
+            border: 3px solid transparent; /* 初期状態での枠線は透明 */
+            border-radius: 10px; /* 枠線の角を丸くする */
+            transition: border-color 0.3s ease; /* 枠線の色が変わるときのアニメーション */
         }
-        button:hover {
-            background-color: #D4CE91; /* ボタンの背景色をホバー時に変更 */
-            color: white; /* ボタンの文字色をホバー時に変更 */
+        button:active {
+            border-color: #D4CE91; /* クリック時の枠線の色 */
         }
         #message {
-            font-size: 45px;
+            font-size: 45px; /* フォントサイズを1.5倍に */
             margin-top: 50px;
-            color: #D4CE91; /* 文字色を指定 */
+            color: #D4CE91; /* 文字色をボタンと同じに設定 */
+            font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
+            display: none; /* 初期状態でメッセージは非表示 */
+        }
+        .container {
+            display: flex; /* フレックスボックスを使用 */
+            justify-content: center; /* ボタンを横並びにして中央に配置 */
+            align-items: center; /* ボタンを縦中央に配置 */
+            height: calc(100vh - 100px); /* ボタン配置エリアの高さを調整 */
+        }
+        .button-container {
+            display: flex; /* ボタンを横並びにするためのコンテナ */
+            gap: 20px; /* ボタン間のスペース */
+        }
+        button {
+            flex: 1; /* ボタンが均等に並ぶように設定 */
+            max-width: 250px; /* ボタンの最大幅を指定 */
         }
     </style>
 </head>
 <body>
-    <div class="button-container">
-        <button onclick="notifyChatwork('総合受付')">総合受付</button>
-        <button onclick="notifyChatwork('配送業者様')">配送業者様</button>
+    <div class="container">
+        <div class="button-container">
+            <button onclick="notifyChatwork('総合受付')">総合受付</button>
+            <button onclick="notifyChatwork('配送業者様')">配送業者様</button>
+        </div>
     </div>
-    <p id="message"></p>
+    <p id="message">しばらくお待ちください。</p>
 
     <script>
+        // Cloud Run のエンドポイントURL
         const cloudRunUrl = 'https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork';  // 正しいURL
 
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
-            messageElement.innerText = "しばらくお待ちください。";
+            messageElement.style.display = "block"; // メッセージを表示
             
             // Chatworkに送信するメッセージ内容
             let chatworkMessage = "";
@@ -84,9 +93,16 @@
                 console.error('Chatworkへの通知に失敗しました', error);
             });
 
+            // 1秒後にボタンの枠線の色を元に戻す
+            setTimeout(() => {
+                document.querySelectorAll('button').forEach(btn => {
+                    btn.style.borderColor = 'transparent';
+                });
+            }, 1000);
+
             // 3秒後にメッセージを消す
             setTimeout(() => {
-                messageElement.innerText = "";
+                messageElement.style.display = "none";
             }, 3000);
         }
     </script>
