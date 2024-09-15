@@ -28,8 +28,8 @@
         }
         button {
             font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
-            font-size: 48px; /* フォントサイズを24pxに設定 */
-            width: 8cm; /* ボタンの横幅を4センチメートルに設定 */
+            font-size: 24px; /* フォントサイズを24pxに設定 */
+            width: 4cm; /* ボタンの横幅を4センチメートルに設定 */
             padding: 10px 0; /* ボタンのパディング */
             margin: 0 2cm; /* ボタンの間隔を2センチメートルに設定 */
             background-color: transparent; /* ボタンの背景色を透明にする */
@@ -50,7 +50,7 @@
         }
         #message {
             font-size: 45px; /* フォントサイズを45pxに設定 */
-            color: #D4CE91; /* 文字色を指定 */
+            color: white; /* 文字色を白に設定 */
             margin-top: 10px; /* ボタンとの間隔を10pxに設定 */
         }
     </style>
@@ -67,7 +67,7 @@
 
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
-            messageElement.innerText = "しばらくお待ちください。";
+            messageElement.innerText = "係の者が参ります。";
             
             // Chatworkに送信するメッセージ内容
             let chatworkMessage = "";
