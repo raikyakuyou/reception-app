@@ -17,6 +17,13 @@
             width: 100vw;
             overflow: hidden; /* スクロールバーを隠す */
         }
+        .button-container {
+            display: flex;
+            justify-content: center; /* ボタンを横並びに配置 */
+            align-items: center;
+            height: 100%; /* 全高を使用 */
+            flex-direction: row; /* ボタンを横並びにする */
+        }
         button {
             font-size: 24px;
             padding: 10px 20px;
@@ -37,21 +44,14 @@
             margin-top: 50px;
             color: #D4CE91; /* 文字色を指定 */
         }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 100px); /* ボタンを表示するための高さを確保 */
-            flex-direction: column;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="button-container">
         <button onclick="notifyChatwork('総合受付')">総合受付</button>
         <button onclick="notifyChatwork('配送業者様')">配送業者様</button>
-        <p id="message"></p>
     </div>
+    <p id="message"></p>
 
     <script>
         const cloudRunUrl = 'https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork';  // 正しいURL
