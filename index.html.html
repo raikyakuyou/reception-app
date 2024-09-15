@@ -16,25 +16,28 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden; /* スクロールバーを隠す */
+            font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
         }
         .button-container {
             display: flex;
+            flex-direction: row; /* ボタンを横並びにする */
             justify-content: center; /* ボタンを横並びに配置 */
             align-items: center;
-            height: calc(100vh - 100px); /* 高さを調整して中央に配置 */
-            flex-direction: row; /* ボタンを横並びにする */
+            height: calc(100vh - 100px); /* ボタンを中央に配置するための高さ調整 */
+            margin-bottom: 20px; /* ボタン下にスペースを追加 */
         }
         button {
             font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
             font-size: 24px; /* フォントサイズを24pxに設定 */
             padding: 10px 20px; /* ボタンのパディング */
-            margin: 10px; /* ボタンの間隔 */
+            margin: 0 10px; /* ボタンの間隔 */
             background-color: transparent; /* ボタンの背景色を透明にする */
             border: 2px solid #D4CE91; /* ボタンの枠線の色を指定 */
             color: #D4CE91; /* ボタンの文字色を指定 */
             border-radius: 5px; /* ボタンの角を丸くする */
             cursor: pointer; /* マウスカーソルをポインタにする */
             transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* ホバー時とアクティブ時のアニメーション */
+            min-width: 140px; /* ボタンの横幅を確保 */
         }
         button:hover {
             background-color: #D4CE91; /* ボタンの背景色をホバー時に変更 */
@@ -44,10 +47,17 @@
             border-color: #D4CE91; /* クリック時の枠の色 */
         }
         #message {
-            font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
             font-size: 45px; /* フォントサイズを45pxに設定 */
             color: #D4CE91; /* 文字色を指定 */
-            margin-top: 10px; /* ボタンとの間隔を1センチメートル（約10px）に設定 */
+            margin-top: 10px; /* ボタンとの間隔を10pxに設定 */
+        }
+        .button-container button:first-of-type {
+            flex-grow: 1; /* 「総合受付」ボタンが残りのスペースを占めるようにする */
+            text-align: center; /* 文字を中央に配置 */
+        }
+        .button-container button:last-of-type {
+            flex-grow: 1; /* 「配送業者様」ボタンが残りのスペースを占めるようにする */
+            text-align: center; /* 文字を中央に配置 */
         }
     </style>
 </head>
