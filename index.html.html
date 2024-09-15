@@ -29,7 +29,8 @@
         button {
             font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
             font-size: 24px; /* フォントサイズを24pxに設定 */
-            padding: 10px 20px; /* ボタンのパディング */
+            width: 4cm; /* ボタンの横幅を4センチメートルに設定 */
+            padding: 10px 0; /* ボタンのパディング */
             margin: 0 10px; /* ボタンの間隔 */
             background-color: transparent; /* ボタンの背景色を透明にする */
             border: 2px solid #D4CE91; /* ボタンの枠線の色を指定 */
@@ -37,7 +38,6 @@
             border-radius: 5px; /* ボタンの角を丸くする */
             cursor: pointer; /* マウスカーソルをポインタにする */
             transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* ホバー時とアクティブ時のアニメーション */
-            min-width: 140px; /* ボタンの横幅を確保 */
         }
         button:hover {
             background-color: #D4CE91; /* ボタンの背景色をホバー時に変更 */
@@ -50,14 +50,6 @@
             font-size: 45px; /* フォントサイズを45pxに設定 */
             color: #D4CE91; /* 文字色を指定 */
             margin-top: 10px; /* ボタンとの間隔を10pxに設定 */
-        }
-        .button-container button:first-of-type {
-            flex-grow: 1; /* 「総合受付」ボタンが残りのスペースを占めるようにする */
-            text-align: center; /* 文字を中央に配置 */
-        }
-        .button-container button:last-of-type {
-            flex-grow: 1; /* 「配送業者様」ボタンが残りのスペースを占めるようにする */
-            text-align: center; /* 文字を中央に配置 */
         }
     </style>
 </head>
