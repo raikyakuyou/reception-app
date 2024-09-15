@@ -34,7 +34,7 @@
             color: #D4CE91; /* ボタンの文字色を指定 */
             border-radius: 5px; /* ボタンの角を丸くする */
             cursor: pointer; /* マウスカーソルをポインタにする */
-            transition: all 0.3s; /* ホバー時とアクティブ時のアニメーション */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* ホバー時とアクティブ時のアニメーション */
         }
         button:hover {
             background-color: #D4CE91; /* ボタンの背景色をホバー時に変更 */
@@ -42,11 +42,6 @@
         }
         button:active {
             border-color: #D4CE91; /* クリック時の枠の色 */
-            animation: colorChange 1s; /* ボタンがクリックされたときに色が変わるアニメーション */
-        }
-        @keyframes colorChange {
-            0% { border-color: #D4CE91; }
-            100% { border-color: #D4CE91; }
         }
         #message {
             font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
@@ -68,4 +63,37 @@
 
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
-            messageElement.innerText = "しばらくお待ちください。"
+            messageElement.innerText = "しばらくお待ちください。";
+            
+            // Chatworkに送信するメッセージ内容
+            let chatworkMessage = "";
+            if (visitorType === '総合受付') {
+                chatworkMessage = "[総合受付]による訪問です。";
+            } else if (visitorType === '配送業者様') {
+                chatworkMessage = "[配送業者様]による訪問です。";
+            }
+
+            // Cloud Runにメッセージを送信
+            fetch(cloudRunUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: chatworkMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Chatworkへの通知に成功しました', data);
+            })
+            .catch(error => {
+                console.error('Chatworkへの通知に失敗しました', error);
+            });
+
+            // 3秒後にメッセージを消す
+            setTimeout(() => {
+                messageElement.innerText = "";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
