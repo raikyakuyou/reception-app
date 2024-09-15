@@ -7,15 +7,14 @@
     <style>
         body {
             text-align: center;
-            margin-top: 50px;
-            background-image: url('ロゴのみ背景白.jpg'); /* ロゴ画像のファイル名を指定 */
-            background-size: cover; /* 画像が全体にフィットするように設定 */
-            background-repeat: no-repeat; /* 画像を繰り返さない */
-            background-position: center center; /* 画像を中央に配置 */
             margin: 0;
             padding: 0;
             height: 100vh;
             width: 100vw;
+            background-image: url('受付用①.jpg'); /* 新しい背景画像のファイル名 */
+            background-size: cover; /* 画像が全体にフィットするように設定 */
+            background-repeat: no-repeat; /* 画像を繰り返さない */
+            background-position: center center; /* 画像を中央に配置 */
         }
         button {
             font-size: 40px; /* フォントサイズを大きく */
@@ -31,14 +30,13 @@
     </style>
 </head>
 <body>
-    <h1>受   　　付</h1>
     <button onclick="notifyChatwork('呼び出し')">呼　び　出　し</button>
     <button onclick="notifyChatwork('郵便・宅配')">郵　便・宅　配</button>
     <p id="message"></p>
 
     <script>
         // Cloud Run のエンドポイントURL
-const cloudRunUrl = 'https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork';  // 正しいURL
+        const cloudRunUrl = 'https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork';  // 正しいURL
 
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
