@@ -9,53 +9,50 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            width: 100vw;
-            background-image: url('受付用①.jpg'); /* 新しい画像ファイル名を指定 */
+            background-image: url('受付用①.jpg'); /* 新しい画像のファイル名を指定 */
             background-size: cover; /* 画像が全体にフィットするように設定 */
             background-repeat: no-repeat; /* 画像を繰り返さない */
             background-position: center center; /* 画像を中央に配置 */
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* スクロールバーを隠す */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* ボタンを横並びに配置 */
+            align-items: center;
+            height: calc(100vh - 100px); /* 高さを調整して中央に配置 */
+            flex-direction: row; /* ボタンを横並びにする */
         }
         button {
             font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
             font-size: 24px; /* フォントサイズを24pxに設定 */
             padding: 10px 20px; /* ボタンのパディング */
-            margin: 20px; /* ボタンの間隔 */
-            background-color: #FFFFFF; /* ボタンの背景色を白に設定 */
+            margin: 10px; /* ボタンの間隔 */
+            background-color: transparent; /* ボタンの背景色を透明にする */
+            border: 2px solid #D4CE91; /* ボタンの枠線の色を指定 */
             color: #D4CE91; /* ボタンの文字色を指定 */
-            border: 2px solid #D4CE91; /* ボタンの枠の色を指定 */
-            border-radius: 5px; /* ボタンの角を丸く */
-            transition: all 0.3s; /* ホバー効果にスムーズなアニメーション */
+            border-radius: 5px; /* ボタンの角を丸くする */
+            cursor: pointer; /* マウスカーソルをポインタにする */
+            transition: all 0.3s; /* ホバー時とアクティブ時のアニメーション */
         }
         button:hover {
-            background-color: #D4CE91; /* ホバー時の背景色 */
-            color: #FFFFFF; /* ホバー時の文字色 */
+            background-color: #D4CE91; /* ボタンの背景色をホバー時に変更 */
+            color: white; /* ボタンの文字色をホバー時に変更 */
         }
         button:active {
-            background-color: #D4CE91; /* クリック時の背景色 */
-            color: #FFFFFF; /* クリック時の文字色 */
             border-color: #D4CE91; /* クリック時の枠の色 */
-            outline: none; /* クリック時のアウトラインを消す */
             animation: colorChange 1s; /* ボタンがクリックされたときに色が変わるアニメーション */
         }
         @keyframes colorChange {
             0% { border-color: #D4CE91; }
-            100% { border-color: #FFFFFF; }
+            100% { border-color: #D4CE91; }
         }
         #message {
             font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
-            font-size: 45px; /* フォントサイズを1.5倍に */
+            font-size: 45px; /* フォントサイズを45pxに設定 */
             color: #D4CE91; /* 文字色を指定 */
-            margin-top: 50px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 100px); /* 高さを調整して中央に配置 */
-        }
-        .button-container button {
-            width: 250px; /* 横幅を指定 */
+            margin-top: 10px; /* ボタンとの間隔を1センチメートル（約10px）に設定 */
         }
     </style>
 </head>
@@ -71,37 +68,4 @@
 
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
-            messageElement.innerText = "しばらくお待ちください。";
-            
-            // Chatworkに送信するメッセージ内容
-            let chatworkMessage = "";
-            if (visitorType === '総合受付') {
-                chatworkMessage = "[総合受付]による訪問です。";
-            } else if (visitorType === '配送業者様') {
-                chatworkMessage = "[配送業者様]による訪問です。";
-            }
-
-            // Cloud Runにメッセージを送信
-            fetch(cloudRunUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: chatworkMessage })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Chatworkへの通知に成功しました', data);
-            })
-            .catch(error => {
-                console.error('Chatworkへの通知に失敗しました', error);
-            });
-
-            // 3秒後にメッセージを消す
-            setTimeout(() => {
-                messageElement.innerText = "";
-            }, 3000);
-        }
-    </script>
-</body>
-</html>
+            messageElement.innerText = "しばらくお待ちください。"
