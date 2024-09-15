@@ -9,38 +9,40 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            width: 100vw;
-            background-image: url('受付用①.jpg'); /* 新しい画像ファイル名を指定 */
+            background-image: url('受付用①.jpg'); /* 新しい画像のファイル名を指定 */
             background-size: cover; /* 画像が全体にフィットするように設定 */
             background-repeat: no-repeat; /* 画像を繰り返さない */
             background-position: center center; /* 画像を中央に配置 */
-        }
-        button {
-            font-size: 24px; /* フォントサイズを設定 */
-            padding: 10px 20px; /* ボタンのパディングを設定 */
-            margin: 20px; /* ボタンの間隔を設定 */
-            background-color: transparent; /* 背景色を透明に設定 */
-            color: #D4CE91; /* テキストの色を設定 */
-            border: 2px solid #D4CE91; /* ボタンの枠の色と太さを設定 */
-            border-radius: 5px; /* ボタンの角を丸くする */
-            cursor: pointer; /* ポインターを手の形にする */
-            font-family: 'Meiryo', sans-serif; /* フォントをMeiryoに設定 */
-        }
-        button:active {
-            background-color: #D4CE91; /* クリック時のボタンの背景色 */
-            color: white; /* クリック時のボタンの文字色 */
-        }
-        #message {
-            font-size: 45px; /* フォントサイズを設定 */
-            margin-top: 50px;
-            color: black; /* 文字色を黒に設定 */
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* スクロールバーを隠す */
         }
         .button-container {
-            display: flex; /* ボタンを横並びにする */
-            justify-content: center; /* ボタンを中央に配置する */
-            margin-top: 50vh; /* 画面中央より少し上に配置 */
-            transform: translateY(-50%); /* 上下中央揃え */
+            display: flex;
+            justify-content: center; /* ボタンを横並びに配置 */
+            align-items: center;
+            height: 100%; /* 全高を使用 */
+            flex-direction: row; /* ボタンを横並びにする */
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin: 20px;
+            background-color: transparent; /* ボタンの背景色を透明にする */
+            border: 2px solid #D4CE91; /* ボタンの枠線の色を指定 */
+            color: #D4CE91; /* ボタンの文字色を指定 */
+            border-radius: 5px; /* ボタンの角を丸くする */
+            cursor: pointer; /* マウスカーソルをポインタにする */
+            transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーションを追加 */
+        }
+        button:hover {
+            background-color: #D4CE91; /* ボタンの背景色をホバー時に変更 */
+            color: white; /* ボタンの文字色をホバー時に変更 */
+        }
+        #message {
+            font-size: 45px;
+            margin-top: 50px;
+            color: #D4CE91; /* 文字色を指定 */
         }
     </style>
 </head>
@@ -52,6 +54,8 @@
     <p id="message"></p>
 
     <script>
+        const cloudRunUrl = 'https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork';  // 正しいURL
+
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
             messageElement.innerText = "しばらくお待ちください。";
@@ -65,7 +69,7 @@
             }
 
             // Cloud Runにメッセージを送信
-            fetch('https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork', {
+            fetch(cloudRunUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
