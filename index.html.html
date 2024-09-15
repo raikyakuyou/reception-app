@@ -17,53 +17,55 @@
             background-position: center center; /* 画像を中央に配置 */
         }
         button {
-            font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
-            font-size: 40px; /* フォントサイズを大きく */
-            padding: 15px 30px; /* ボタンのパディングも少し増やす */
-            margin: 20px; /* ボタンの間隔を広げる */
-            background-color: #ffffff; /* ボタンの背景色 */
-            border: 2px solid #D4CE91; /* ボタンの枠線の色 */
-            color: #D4CE91; /* ボタンの文字色 */
-            border-radius: 10px; /* ボタンの角を丸くする */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ボタンに影を付ける */
+            font-size: 24px; /* フォントサイズを設定 */
+            padding: 10px 20px; /* ボタンのパディングを設定 */
+            margin: 20px; /* ボタンの間隔を設定 */
+            background-color: transparent; /* 背景色を透明に設定 */
+            color: #D4CE91; /* テキストの色を設定 */
+            border: 2px solid #D4CE91; /* ボタンの枠の色と太さを設定 */
+            border-radius: 5px; /* ボタンの角を丸くする */
+            cursor: pointer; /* ポインターを手の形にする */
+            font-family: 'Meiryo', sans-serif; /* フォントをMeiryoに設定 */
         }
-        button:hover {
-            background-color: #D4CE91; /* ホバー時のボタン背景色 */
-            color: #ffffff; /* ホバー時の文字色 */
+        button:active {
+            background-color: #D4CE91; /* クリック時のボタンの背景色 */
+            color: white; /* クリック時のボタンの文字色 */
         }
         #message {
-            font-size: 45px; /* フォントサイズを1.5倍に */
-            margin-top: 20px;
+            font-size: 45px; /* フォントサイズを設定 */
+            margin-top: 50px;
             color: black; /* 文字色を黒に設定 */
+        }
+        .button-container {
+            display: flex; /* ボタンを横並びにする */
+            justify-content: center; /* ボタンを中央に配置する */
+            margin-top: 50vh; /* 画面中央より少し上に配置 */
+            transform: translateY(-50%); /* 上下中央揃え */
         }
     </style>
 </head>
 <body>
-    <h1 style="display: none;">受付</h1> <!-- 文字を非表示にする -->
-    <div style="display: flex; flex-direction: column; justify-content: center; height: 100vh; align-items: center; margin-top: -50px;">
-        <button onclick="notifyChatwork('呼び出し')">呼び出し</button>
-        <button onclick="notifyChatwork('郵便・宅配')">郵便・宅配</button>
+    <div class="button-container">
+        <button onclick="notifyChatwork('総合受付')">総合受付</button>
+        <button onclick="notifyChatwork('配送業者様')">配送業者様</button>
     </div>
     <p id="message"></p>
 
     <script>
-        // Cloud Run のエンドポイントURL
-        const cloudRunUrl = 'https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork';  // 正しいURL
-
         function notifyChatwork(visitorType) {
             const messageElement = document.getElementById('message');
-            messageElement.innerText = "呼び出しております。しばらくお待ちください。";
+            messageElement.innerText = "しばらくお待ちください。";
             
             // Chatworkに送信するメッセージ内容
             let chatworkMessage = "";
-            if (visitorType === '呼び出し') {
-                chatworkMessage = "[呼び出し]による訪問です。";
-            } else if (visitorType === '郵便・宅配') {
-                chatworkMessage = "[郵便・宅配]による訪問です。";
+            if (visitorType === '総合受付') {
+                chatworkMessage = "[総合受付]による訪問です。";
+            } else if (visitorType === '配送業者様') {
+                chatworkMessage = "[配送業者様]による訪問です。";
             }
 
             // Cloud Runにメッセージを送信
-            fetch(cloudRunUrl, {
+            fetch('https://chatworknotifier-685199590370.asia-northeast1.run.app/notify-chatwork', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -86,4 +88,3 @@
     </script>
 </body>
 </html>
-
