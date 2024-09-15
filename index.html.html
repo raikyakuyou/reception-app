@@ -11,27 +11,39 @@
             padding: 0;
             height: 100vh;
             width: 100vw;
-            background-image: url('受付用①.jpg'); /* 新しい背景画像のファイル名 */
+            background-image: url('受付用①.jpg'); /* 新しい画像ファイル名を指定 */
             background-size: cover; /* 画像が全体にフィットするように設定 */
             background-repeat: no-repeat; /* 画像を繰り返さない */
             background-position: center center; /* 画像を中央に配置 */
         }
         button {
+            font-family: 'Meiryo', sans-serif; /* フォントをメイリオに設定 */
             font-size: 40px; /* フォントサイズを大きく */
             padding: 15px 30px; /* ボタンのパディングも少し増やす */
-            margin: 40px; /* ボタンの間隔を広げる */
-            margin-top: 50px; /* ボタンの位置を下げる */
+            margin: 20px; /* ボタンの間隔を広げる */
+            background-color: #ffffff; /* ボタンの背景色 */
+            border: 2px solid #D4CE91; /* ボタンの枠線の色 */
+            color: #D4CE91; /* ボタンの文字色 */
+            border-radius: 10px; /* ボタンの角を丸くする */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ボタンに影を付ける */
+        }
+        button:hover {
+            background-color: #D4CE91; /* ホバー時のボタン背景色 */
+            color: #ffffff; /* ホバー時の文字色 */
         }
         #message {
             font-size: 45px; /* フォントサイズを1.5倍に */
-            margin-top: 50px;
+            margin-top: 20px;
             color: black; /* 文字色を黒に設定 */
         }
     </style>
 </head>
 <body>
-    <button onclick="notifyChatwork('呼び出し')">呼　び　出　し</button>
-    <button onclick="notifyChatwork('郵便・宅配')">郵　便・宅　配</button>
+    <h1 style="display: none;">受付</h1> <!-- 文字を非表示にする -->
+    <div style="display: flex; flex-direction: column; justify-content: center; height: 100vh; align-items: center; margin-top: -50px;">
+        <button onclick="notifyChatwork('呼び出し')">呼び出し</button>
+        <button onclick="notifyChatwork('郵便・宅配')">郵便・宅配</button>
+    </div>
     <p id="message"></p>
 
     <script>
@@ -74,3 +86,4 @@
     </script>
 </body>
 </html>
+
